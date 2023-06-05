@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
               <div className="main__container w-[80%]">
                 {children}
               </div>
-            </main>
+            </main> 
           </ThemeWrapper>
         </Providers>
       </body>
