@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
       <body>
         <Providers>
           <ThemeWrapper>
-            <main className="flex w-full max-[750px]:px-8 px-24" >
+            <main className="flex w-full max-[750px]:px-8 px-24 bg-black">
               <Sidebar />
               <div className="main__container w-[80%]">
                 {children}
