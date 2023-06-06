@@ -5,9 +5,9 @@ import { useSelector } from "react-redux";
 const ThemeWrapper = ({ children }) => {
   const theme = useSelector((state) => state.theme);
   return (
-    <div className={`transition-all duration-300 bg-skin-fill theme-${theme}`}>
+    <main className={`transition-all duration-300 bg-skin-fill theme-lightout`}>
       {children}
-    </div>
+    </main>
   );
 };
 
