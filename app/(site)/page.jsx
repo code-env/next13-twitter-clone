@@ -1,5 +1,4 @@
 import { Header, HomeSidebar, Posts, Share } from "@components";
-import React from "react";
 
 const Home = () => {
   return (

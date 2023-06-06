@@ -5,12 +5,21 @@ import { RiCloseLine } from "react-icons/ri";
 import CustomizeImage from "./CustomizeImage";
 import { BiImage } from "react-icons/bi";
 import { ButtonContainer } from "@components";
+import { useSession } from "next-auth/react";
 
 const Share = () => {
   const [file, setFile] = useState(null);
+
+  const {data: sesion} = useSession()
+  
+  console.log(sesion?.user);
+
   return (
     <div className="px-8 py-4 bg-skin-fill flex gap-4">
-      <div className="user__profile  ">
+      {
+        sesion?.user ? (
+          <>
+            <div className="user__profile  ">
         <CustomizeImage
           src="/Images/user1.jpg"
           height={40}
@@ -67,6 +76,41 @@ const Share = () => {
           </div>
         </div>
       </div>
+          </>
+        ) : (
+            <div className="auth__container mx-auto flex flex-col items-center justify-center gap-4">
+              <h1 className="font-bold text-2xl">Welcome to Twitter</h1>
+              <div className="auth__buttons flex gap-4 items-center">
+                <ButtonContainer className="
+                  border
+                 border-sky-500
+                 bg-sky-500
+                 px-4 h-[40px]
+                  rounded-[20px]
+                  text-white
+                  hover:bg-white
+                  transition
+                  hover:text-sky-500"
+                  label="Login" />
+                <ButtonContainer
+                  className="
+                 border
+                 border-black
+                  px-4 h-[40px]
+                  rounded-[20px]
+                  text-black
+                  hover:bg-black
+                  transition
+                  hover:text-white
+                 "
+                  label="Register"
+                  
+                />
+              </div>
+            </div>
+        )
+      }
+      
     </div>
   );
 };
