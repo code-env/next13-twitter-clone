@@ -6,13 +6,20 @@ import CustomizeImage from "./CustomizeImage";
 import { BiImage } from "react-icons/bi";
 import { ButtonContainer } from "@components";
 import { useSession } from "next-auth/react";
+import {  useDispatch } from "react-redux";
+import { toggleModal } from "@redux/slice/modalSlice";
 
 const Share = () => {
   const [file, setFile] = useState(null);
 
+  const dispatch = useDispatch()
+
+  const handleClick = () => {
+    dispatch(toggleModal())
+  }
+
   const {data: sesion} = useSession()
-  
-  console.log(sesion?.user);
+
 
   return (
     <div className="px-8 py-4 bg-skin-fill flex gap-4">
@@ -91,6 +98,7 @@ const Share = () => {
                   hover:bg-white
                   transition
                   hover:text-sky-500"
+                  onClick={handleClick}
                   label="Login" />
                 <ButtonContainer
                   className="
@@ -103,14 +111,15 @@ const Share = () => {
                   transition
                   hover:text-white
                  "
+                  onClick={handleClick}
                   label="Register"
-                  
+
                 />
               </div>
             </div>
         )
       }
-      
+
     </div>
   );
 };
