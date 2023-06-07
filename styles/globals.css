@@ -36,6 +36,14 @@ input {
   background: none;
 }
 
+.modal__container {
+  @apply bg-neutral-500/30 fixed top-0 left-0 w-full h-screen text-white z-50 flex items-center justify-center;
+}
+
+.modal__container svg {
+  @apply absolute top-3 right-3 cursor-pointer;
+}
+
 .input__container > svg {
   color: #cbd4e1;
 }
