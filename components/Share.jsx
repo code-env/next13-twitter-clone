@@ -83,32 +83,15 @@ const Share = () => {
           <h1 className="font-bold text-2xl">Welcome to Twitter</h1>
           <div className="auth__buttons flex gap-4 items-center">
             <ButtonContainer
-              className="
-                  border
-                 border-sky-500
-                 bg-sky-500
-                 px-4 h-[40px]
-                  rounded-[20px]
-                  text-white
-                  hover:bg-white
-                  transition
-                  hover:text-sky-500"
               onClick={() => handleClick("login")}
               label="Login"
+              rounded
             />
             <ButtonContainer
-              className="
-                 border
-                 border-black
-                  px-4 h-[40px]
-                  rounded-[20px]
-                  text-black
-                  hover:bg-black
-                  transition
-                  hover:text-white
-                 "
               onClick={() => handleClick("register")}
               label="Register"
+              secondary
+              rounded
             />
           </div>
         </div>

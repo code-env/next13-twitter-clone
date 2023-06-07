@@ -8,13 +8,13 @@ const ButtonContainer = ({
   large,
   disabled,
   outline,
+  rounded,
 }) => {
   return (
     <button
       className={`
         disabled:opacity-70
         disabled:cursor-not-allowed
-        rounded-full
         font-semibold
         hover:opacity-80
         transition
@@ -30,6 +30,7 @@ const ButtonContainer = ({
         ${outline ? "bg-transparent" : ""}
         ${outline ? "border-white" : ""}
         ${outline ? "text-white" : ""}
+        ${rounded ? "rounded-full" : "rounded"}
       `}
       onClick={onClick}
       disabled={disabled}

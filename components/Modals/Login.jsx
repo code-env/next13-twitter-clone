@@ -12,12 +12,17 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
   };
 
-  const saythere = () => {
+  const toggleModal = () => {
+    if (isLoading) {
+      return;
+    }
     dispatch(openModal("register"));
   };
 
@@ -30,8 +35,6 @@ const Login = () => {
     }));
   };
 
-  console.log(userData);
-
   return (
     <form onSubmit={handleLogin} className="flex flex-col gap-4">
       <InputContainer
@@ -41,6 +44,7 @@ const Login = () => {
         email
         value={email}
         name="email"
+        disabled={isLoading}
       />
       <InputContainer
         onChange={handleOnChange}
@@ -49,14 +53,19 @@ const Login = () => {
         password
         value={password}
         name="password"
+        disabled={isLoading}
       />
-      <ButtonContainer label="Sign In" fullWidth />
+      <ButtonContainer
+        label={isLoading ? "Signing in..." : "Sign In"}
+        fullWidth
+        disabled={isLoading}
+      />
 
       <div className="text-neutral-400 text-center mt-4">
         <p>
           New on Twitter?{" "}
           <span
-            onClick={saythere}
+            onClick={toggleModal}
             className="
             text-gray-500 
             cursor-pointer 

@@ -42,11 +42,7 @@ const Settings = () => {
         </label>
         <InputContainer type="text" placeholder="Username" username />
         <InputContainer type="email" placeholder="Email" email />
-        <ButtonContainer
-          type="submit"
-          label="Update"
-          className="flex w-full h-[40px] bg-sky-400 items-center justify-center rounded text-white disabled:bg-sky-500/25"
-        />
+        <ButtonContainer label="Update" fullWidth />
       </form>
     </div>
   );
