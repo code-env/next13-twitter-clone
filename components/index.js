@@ -8,6 +8,10 @@ import CustomizeImage from "./CustomizeImage";
 import ButtonContainer from "./ButtonContainer";
 import InputContainer from "./InputContainer";
 import SettingsSidebar from "./settingsSidebar";
+import Modal from "./Modal";
+import Login from "./Modals/Login";
+import Register from "./Modals/Register";
+import ProfileEdit from "./Modals/ProfileEdit";
 
 export {
   Sidebar,
@@ -20,4 +24,8 @@ export {
   ButtonContainer,
   InputContainer,
   SettingsSidebar,
+  Modal,
+  Login,
+  Register,
+  ProfileEdit,
 };

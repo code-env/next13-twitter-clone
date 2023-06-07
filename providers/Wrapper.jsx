@@ -1,27 +1,20 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
-import { toggleModal } from "@redux/slice/modalSlice";
-import Modal from "@components/Modal";
-import { AiOutlineClose } from "react-icons/ai";
+import { useSelector } from "react-redux";
+import { Login, Modal, ProfileEdit, Register } from "@components";
 
 const Wrapper = ({ children }) => {
-  const modal = useSelector((state) => state.modal);
-  const dispact = useDispatch();
+  const { default: initialState, type } = useSelector((state) => state.modal);
 
-  const handleClick = () => {
-    dispact(toggleModal());
-  };
-
+  console.log(type);
   return (
     <main className="relative">
       {children}
-      {modal && (
+      {initialState && (
         <Modal>
-          <div className="modal__container">
-            <AiOutlineClose onClick={handleClick} size={25} />
-            this is a text
-          </div>
+          {type.toString() === "login" && <Login />}
+          {type === "register" && <Register />}
+          {type === "profileedit" && <ProfileEdit />}
         </Modal>
       )}
     </main>

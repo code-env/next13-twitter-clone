@@ -3,7 +3,16 @@
 import { useState } from "react";
 import { HiAtSymbol, HiFingerPrint, HiOutlineUser } from "react-icons/hi";
 
-const InputContainer = ({ type, placeholder, email, password, username }) => {
+const InputContainer = ({
+  type,
+  placeholder,
+  email,
+  password,
+  username,
+  onChange,
+  name,
+  value,
+}) => {
   const [inputType, setInputType] = useState("password");
 
   const handleOnClick = () => {
@@ -18,7 +27,10 @@ const InputContainer = ({ type, placeholder, email, password, username }) => {
       <input
         type={password ? inputType : type}
         placeholder={placeholder}
-        className="h-[40px] flex-1"
+        className="h-[40px] flex-1 text-black"
+        onChange={onChange}
+        name={name}
+        value={value}
       />
       {email && <HiAtSymbol size={20} />}
       {password && (

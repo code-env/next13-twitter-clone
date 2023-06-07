@@ -1,8 +1,38 @@
 import React from "react";
 
-const ButtonContainer = ({ label, type, className, onClick }) => {
+const ButtonContainer = ({
+  label,
+  secondary,
+  fullWidth,
+  onClick,
+  large,
+  disabled,
+  outline,
+}) => {
   return (
-    <button type={type} className={className} onClick={onClick}>
+    <button
+      className={`
+        disabled:opacity-70
+        disabled:cursor-not-allowed
+        rounded-full
+        font-semibold
+        hover:opacity-80
+        transition
+        border-2
+        outline-none
+        ${fullWidth ? "w-full" : "w-fit"}
+        ${secondary ? "bg-white" : "bg-sky-500"}
+        ${secondary ? "text-black" : "text-white"}
+        ${secondary ? "border-black" : "border-sky-500"}
+        ${large ? "text-xl" : "text-md"}
+        ${large ? "px-5" : "px-4"}
+        ${large ? "py-3" : "py-2"}
+        ${outline ? "bg-transparent" : ""}
+        ${outline ? "border-white" : ""}
+        ${outline ? "text-white" : ""}
+      `}
+      onClick={onClick}
+    >
       {label}
     </button>
   );

@@ -1,5 +1,65 @@
 "use client";
 
-const Modal = ({ children }) => <div>{children}</div>;
+import { closeModal } from "@redux/slice/modalSlice";
+import { AiOutlineClose } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+
+const Modal = ({ children }) => {
+  const { type } = useSelector((state) => state.modal);
+  const dispatch = useDispatch();
+  const handleClose = () => {
+    dispatch(closeModal());
+  };
+  return (
+    <div className="modal__container">
+      <div className="relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto">
+        <div
+          className="
+            h-full
+            lg:h-auto
+            border-0 
+            rounded-lg 
+            shadow-lg 
+            relative 
+            flex 
+            flex-col 
+            w-full 
+            bg-white
+            outline-none 
+            focus:outline-none
+            "
+        >
+          <div
+            className="
+              flex 
+              items-center 
+              justify-between 
+              p-10 
+              rounded-t
+              "
+          >
+            <h3 className="text-3xl font-semibold text-black capitalize">
+              {type}
+            </h3>
+            <button
+              className="
+                  p-1 
+                  ml-auto
+                  border-0 
+                  text-black
+                  hover:opacity-70
+                  transition 
+                "
+              onClick={handleClose}
+            >
+              <AiOutlineClose size={20} />
+            </button>
+          </div>
+          <div className="relative p-10 flex-auto">{children}</div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Modal;
