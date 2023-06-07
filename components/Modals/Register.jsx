@@ -76,7 +76,11 @@ const Register = () => {
         name="password"
         disabled={isLoading}
       />
-      <ButtonContainer label="Sign In" fullWidth />
+      <ButtonContainer
+        label={isLoading ? "Creating..." : "Sign In"}
+        fullWidth
+        disabled={isLoading}
+      />
 
       <div className="text-neutral-400 text-center mt-4">
         <p>

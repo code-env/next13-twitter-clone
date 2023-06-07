@@ -13,8 +13,8 @@ const handler = NextAuth({
         email: { label: "email", type: "text" },
         password: { label: "password", type: "password" },
       },
-      async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
+      async authorize({ email, password }) {
+        if (!email || !password) {
           throw new Error("Credentials required");
         }
 

@@ -32,6 +32,7 @@ const ButtonContainer = ({
         ${outline ? "text-white" : ""}
       `}
       onClick={onClick}
+      disabled={disabled}
     >
       {label}
     </button>
