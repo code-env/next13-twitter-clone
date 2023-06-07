@@ -12,6 +12,7 @@ const InputContainer = ({
   onChange,
   name,
   value,
+  disabled,
 }) => {
   const [inputType, setInputType] = useState("password");
 
@@ -27,10 +28,11 @@ const InputContainer = ({
       <input
         type={password ? inputType : type}
         placeholder={placeholder}
-        className="h-[40px] flex-1 text-black"
+        className="h-[40px] flex-1 text-black disabled:cursor-not-allowed"
         onChange={onChange}
         name={name}
         value={value}
+        disabled={disabled}
       />
       {email && <HiAtSymbol size={20} />}
       {password && (

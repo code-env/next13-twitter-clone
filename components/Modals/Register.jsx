@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 
 const Register = () => {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [userData, setUserData] = useState({
     email: "",
@@ -17,9 +18,13 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
   };
 
   const toggleModal = () => {
+    if (isLoading) {
+      return;
+    }
     dispatch(openModal("login"));
   };
 
@@ -32,8 +37,6 @@ const Register = () => {
     }));
   };
 
-  console.log(userData);
-
   return (
     <form onSubmit={handleRegister} className="flex flex-col gap-4">
       <InputContainer
@@ -43,14 +46,16 @@ const Register = () => {
         username
         value={username}
         name="username"
+        disabled={isLoading}
       />
       <InputContainer
         onChange={handleOnChange}
         type="text"
-        placeholder={`@handle. ex:@${username ? username : "username"}`}
+        placeholder={`@handle. ex:@${username}`}
         username
         value={handle}
         name="handle"
+        disabled={isLoading}
       />
       <InputContainer
         onChange={handleOnChange}
@@ -59,6 +64,7 @@ const Register = () => {
         email
         value={email}
         name="email"
+        disabled={isLoading}
       />
 
       <InputContainer
@@ -68,6 +74,7 @@ const Register = () => {
         password
         value={password}
         name="password"
+        disabled={isLoading}
       />
       <ButtonContainer label="Sign In" fullWidth />
 

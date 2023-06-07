@@ -2,17 +2,25 @@
 
 import { CustomizeImage } from "@components";
 import { userPosts } from "@constants";
+import { openModal } from "@redux/slice/modalSlice";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { BiComment, BiHeart } from "react-icons/bi";
+import { useDispatch } from "react-redux";
 
 const Post = ({ data }) => {
   const [isLiked, setisLiked] = useState(false);
+  const { data: session } = useSession();
+  const dispatch = useDispatch();
 
   const post = userPosts.find((post) => post.id === data.id);
 
   const handleAddComment = async () => {};
 
   const handleAddLike = async () => {
+    if (!session?.user) {
+      return dispatch(openModal("login"));
+    }
     if (data.id === post.id) {
       setisLiked(true);
     } else {
