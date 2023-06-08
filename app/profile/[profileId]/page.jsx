@@ -14,23 +14,28 @@ import { useCurrentUser } from "@helpers";
 import { useEffect, useState } from "react";
 
 const Profile = () => {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
   const dispatch = useDispatch();
   const { profileId } = useParams();
   const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
     const getCurrentUser = async () => {
-      const user = await useCurrentUser(session?.user.id);
+      const user = await useCurrentUser(35467890);
       setCurrentUser(user);
     };
 
     getCurrentUser();
   }, []);
 
+  const followingUser = currentUser?.followers?.find((id) => id);
+  console.log(followingUser, profileId);
+
   const getUser = () => {
-    if (session?.user?.id === profileId) {
+    if (currentUser.id === profileId) {
       return "Edit Profile";
+    } else if (followingUser) {
+      return "Unfollow";
     } else {
       return "Follow";
     }
@@ -38,16 +43,17 @@ const Profile = () => {
 
   const handleClick = async () => {
     const type = getUser();
-
-    console.log(currentUser);
     if (type === "Edit Profile") {
       dispatch(openModal("profileedit"));
-    } else {
+    } else if (type === "Unfollow") {
       try {
         //logic to follow and unfollow user
+        console.log(type);
       } catch (error) {
         console.log(error.message);
       }
+    } else {
+      console.log(type);
     }
   };
 
