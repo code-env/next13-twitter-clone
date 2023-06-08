@@ -1,13 +1,47 @@
 "use client";
 
-import { CustomizeImage, Header, HomeSidebar } from "@components";
+import {
+  ButtonContainer,
+  CustomizeImage,
+  Header,
+  HomeSidebar,
+} from "@components";
+import { useSession } from "next-auth/react";
+import { useDispatch } from "react-redux";
+import { useParams } from "next/navigation";
+import { openModal } from "@redux/slice/modalSlice";
 
 const Profile = () => {
+  const { data: session } = useSession();
+  const dispatch = useDispatch();
+  const { profileId } = useParams();
+
+  const getUser = () => {
+    if (session?.user?.id === profileId) {
+      return "Edit Profile";
+    } else {
+      return "Follow";
+    }
+  };
+
+  const handleClick = async () => {
+    const type = getUser();
+    if (type === "Edit Profile") {
+      dispatch(openModal("profileedit"));
+    } else {
+      try {
+        //logic to follow and unfollow user
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen flex">
-      <div className="profile__container border-x flex-1">
+      <div className="border-x flex-1">
         <Header arrow={true} title="username" />
-        <div className="bg-black w-full relative">
+        <div className="w-full relative">
           <CustomizeImage
             alt="cover picture of username"
             width={600}
@@ -24,6 +58,21 @@ const Profile = () => {
               className="rounded-full w-full h-full"
             />
           </div>
+        </div>
+        <div
+          className="
+           flex 
+           justify-end
+           mt-4
+           pr-4
+           "
+        >
+          <ButtonContainer
+            label={getUser()}
+            black
+            rounded
+            onClick={handleClick}
+          />
         </div>
       </div>
       <HomeSidebar />

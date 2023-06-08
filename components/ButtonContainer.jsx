@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 
 const ButtonContainer = ({
   label,
@@ -9,6 +9,7 @@ const ButtonContainer = ({
   disabled,
   outline,
   rounded,
+  black,
 }) => {
   return (
     <button
@@ -20,16 +21,31 @@ const ButtonContainer = ({
         transition
         border-2
         outline-none
+        px-4
+        py-2
         ${fullWidth ? "w-full" : "w-fit"}
-        ${secondary ? "bg-white" : "bg-sky-500"}
-        ${secondary ? "text-black" : "text-white"}
-        ${secondary ? "border-black" : "border-sky-500"}
+        ${
+          secondary
+            ? "bg-sky-500"
+            : "bg-white" || black
+            ? "bg-black"
+            : "bg-white"
+        }
+        ${
+          secondary
+            ? "text-white"
+            : "text-black" || black
+            ? "text-white"
+            : "text-black"
+        }
+        ${
+          secondary
+            ? "border-sky-500"
+            : "border-black" || black
+            ? "border-black"
+            : "border-transparent"
+        }
         ${large ? "text-xl" : "text-md"}
-        ${large ? "px-5" : "px-4"}
-        ${large ? "py-3" : "py-2"}
-        ${outline ? "bg-transparent" : ""}
-        ${outline ? "border-white" : ""}
-        ${outline ? "text-white" : ""}
         ${rounded ? "rounded-full" : "rounded"}
       `}
       onClick={onClick}

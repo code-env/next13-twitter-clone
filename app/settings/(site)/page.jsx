@@ -6,9 +6,11 @@ import { BiImage } from "react-icons/bi";
 
 const Settings = () => {
   const [file, setFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleUpdateUser = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
   };
 
   return (
@@ -40,9 +42,24 @@ const Settings = () => {
             <BiImage />
           </div>
         </label>
-        <InputContainer type="text" placeholder="Username" username />
-        <InputContainer type="email" placeholder="Email" email />
-        <ButtonContainer label="Update" fullWidth />
+        <InputContainer
+          type="text"
+          placeholder="Username"
+          username
+          disabled={isLoading}
+        />
+        <InputContainer
+          type="email"
+          placeholder="Email"
+          email
+          disabled={isLoading}
+        />
+        <ButtonContainer
+          label="Update"
+          fullWidth
+          disabled={isLoading}
+          secondary
+        />
       </form>
     </div>
   );

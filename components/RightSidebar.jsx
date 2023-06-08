@@ -1,8 +1,13 @@
+"use client";
+
 import { ButtonContainer, CustomizeImage } from "@components";
 import { usersToFollow } from "@constants";
 import Image from "next/image";
 
 const HomeSidebar = () => {
+  const handleFollow = (username) => {
+    console.log(username);
+  };
   return (
     <div className="w-[30%] pl-8 py-4 hidden lg:block">
       <div className="flex flex-col h-fit w-full  bg-gray-200/30 rounded-2xl sticky top-4">
@@ -33,7 +38,9 @@ const HomeSidebar = () => {
               <ButtonContainer
                 type="button"
                 label="Follow"
-                className="h-[40px] px-[20px] rounded-[20px]  border-[#1EA1F2] border text-[#1EA1F2] hover:bg-[#1EA1F2] hover:text-white transition-all"
+                rounded
+                secondary
+                onClick={() => handleFollow(user.name)}
               />
             </div>
           ))}

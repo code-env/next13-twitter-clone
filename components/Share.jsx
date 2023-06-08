@@ -86,12 +86,13 @@ const Share = () => {
               onClick={() => handleClick("login")}
               label="Login"
               rounded
+              secondary
             />
             <ButtonContainer
               onClick={() => handleClick("register")}
               label="Register"
-              secondary
               rounded
+              black
             />
           </div>
         </div>

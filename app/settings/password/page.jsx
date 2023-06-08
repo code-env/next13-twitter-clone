@@ -4,14 +4,16 @@ import React, { useState } from "react";
 import { InputContainer, ButtonContainer } from "@components";
 
 const Password = () => {
-  const handleUpdatePassword = async (e) => {
-    e.preventDefault();
-  };
-
   const [passwords, setPasswords] = useState({
     currentPassword: "",
     newPassword: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleUpdatePassword = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+  };
 
   const { currentPassword, newPassword } = passwords;
 
@@ -35,6 +37,7 @@ const Password = () => {
           onChange={handleChange}
           name="currentPassword"
           value={currentPassword}
+          disabled={isLoading}
         />
         <InputContainer
           password
@@ -43,8 +46,14 @@ const Password = () => {
           name="newPassword"
           value={newPassword}
           onChange={handleChange}
+          disabled={isLoading}
         />
-        <ButtonContainer label="update" fullWidth />
+        <ButtonContainer
+          label="update"
+          fullWidth
+          disabled={isLoading}
+          secondary
+        />
       </form>
     </div>
   );
