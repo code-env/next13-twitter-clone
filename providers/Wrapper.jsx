@@ -6,7 +6,6 @@ import { Login, Modal, ProfileEdit, Register } from "@components";
 const Wrapper = ({ children }) => {
   const { default: initialState, type } = useSelector((state) => state.modal);
 
-  console.log(type);
   return (
     <main className="relative">
       {children}
