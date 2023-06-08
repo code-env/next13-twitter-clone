@@ -11,11 +11,22 @@ import { useDispatch } from "react-redux";
 import { useParams } from "next/navigation";
 import { openModal } from "@redux/slice/modalSlice";
 import { useCurrentUser } from "@helpers";
+import { useEffect, useState } from "react";
 
 const Profile = () => {
   const { data: session } = useSession();
   const dispatch = useDispatch();
   const { profileId } = useParams();
+  const [currentUser, setCurrentUser] = useState({});
+
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      const user = await useCurrentUser(session?.user.id);
+      setCurrentUser(user);
+    };
+
+    getCurrentUser();
+  }, []);
 
   const getUser = () => {
     if (session?.user?.id === profileId) {
@@ -27,7 +38,6 @@ const Profile = () => {
 
   const handleClick = async () => {
     const type = getUser();
-    const currentUser = await useCurrentUser(profileId);
 
     console.log(currentUser);
     if (type === "Edit Profile") {
