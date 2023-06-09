@@ -21,7 +21,7 @@ const Register = () => {
     e.preventDefault();
     try {
       setIsLoading(true);
-      await axios.post("http://localhost:3000/api/auth/register", userData);
+      await axios.post("http://localhost:3000/api/register", userData);
     } catch (error) {
       console.log(error.message);
     } finally {
