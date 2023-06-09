@@ -2,8 +2,7 @@
 
 import { ButtonContainer, InputContainer } from "@components";
 import { openModal } from "@redux/slice/modalSlice";
-import axios from "axios";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 
 const Register = () => {
@@ -17,17 +16,29 @@ const Register = () => {
     handle: "",
   });
 
-  const handleRegister = async (e) => {
+  const handleRegister = useCallback(async (e) => {
     e.preventDefault();
     try {
-      setIsLoading(true);
-      await axios.post("http://localhost:3000/api/register", userData);
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+          handle,
+        }),
+      });
+
+      console.log(response);
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
-  };
+  });
 
   const toggleModal = () => {
     if (isLoading) {
