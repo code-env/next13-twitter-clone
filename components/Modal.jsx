@@ -10,6 +10,15 @@ const Modal = ({ children }) => {
   const handleClose = () => {
     dispatch(closeModal());
   };
+
+  const header = () => {
+    if (type === "register") return "Create your account";
+    if (type === "login") return "Login to your account";
+    if (type === "profileedit") return "Edit Your profile";
+  };
+
+  console.log(header());
+
   return (
     <div className="modal__container">
       <div className="relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto">
@@ -38,9 +47,7 @@ const Modal = ({ children }) => {
               rounded-t
               "
           >
-            <h3 className="text-3xl font-semibold text-black capitalize">
-              {type}
-            </h3>
+            <h3 className="text-3xl font-semibold text-black">{header()}</h3>
             <button
               className="
                   p-1 

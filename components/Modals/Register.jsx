@@ -80,6 +80,7 @@ const Register = () => {
         label={isLoading ? "Creating..." : "Sign In"}
         fullWidth
         disabled={isLoading}
+        secondary
       />
 
       <div className="text-neutral-400 text-center mt-4">

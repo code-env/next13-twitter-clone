@@ -59,6 +59,7 @@ const Login = () => {
         label={isLoading ? "Signing in..." : "Sign In"}
         fullWidth
         disabled={isLoading}
+        secondary
       />
 
       <div className="text-neutral-400 text-center mt-4">

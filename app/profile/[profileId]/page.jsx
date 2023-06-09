@@ -31,8 +31,10 @@ const Profile = () => {
     getCurrentUser();
   }, []);
 
+  console.log(currentUser.id.toString() === profileId);
+
   const getUser = () => {
-    if (currentUser.id === profileId) {
+    if (currentUser.id.toString() === profileId) {
       return "Edit Profile";
     } else if (isFollingUser?.toString() === profileId) {
       return "Unfollow";
