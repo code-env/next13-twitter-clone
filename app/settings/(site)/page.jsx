@@ -21,13 +21,13 @@ const Settings = () => {
       >
         <label
           htmlFor="profile"
-          className="cursor-pointer  w-fit mx-auto rounded-full group relative"
+          className="cursor-pointer  w-fit mx-auto rounded-full group relative aria-disabled:cursor-not-allowed"
+          aria-disabled={isLoading}
         >
           <CustomizeImage
             alt="profile picture of username"
             src={file ? URL.createObjectURL(file) : "/Images/user1.jpg"}
-            width={150}
-            height={150}
+            isLarge
             className="rounded-full max-h-[150px] object-cover"
           />
           <input

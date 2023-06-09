@@ -6,12 +6,13 @@ import {
   Header,
   HomeSidebar,
 } from "@components";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
 import { useParams } from "next/navigation";
 import { openModal } from "@redux/slice/modalSlice";
 import { useCurrentUser, useFollowingUser } from "@helpers";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const Profile = () => {
   // const { data: session } = useSession();
@@ -31,10 +32,8 @@ const Profile = () => {
     getCurrentUser();
   }, []);
 
-  console.log(currentUser.id.toString() === profileId);
-
   const getUser = () => {
-    if (currentUser.id.toString() === profileId) {
+    if (currentUser?.id?.toString() === profileId) {
       return "Edit Profile";
     } else if (isFollingUser?.toString() === profileId) {
       return "Unfollow";
@@ -64,12 +63,19 @@ const Profile = () => {
       <div className="border-x flex-1">
         <Header arrow={true} title="username" />
         <div className="w-full relative">
-          <div className="h-44 bg-black relative">
-            <CustomizeImage
-              alt="cover picture of username"
-              src="/Images/cover.png"
-              className="object-cover"
-            />
+          <div
+            className={`h-44 ${
+              currentUser?.coverImage ? "bg-none" : "bg-[#CFD9DE]"
+            } relative`}
+          >
+            {currentUser.coverImage && (
+              <Image
+                alt="cover picture of username"
+                src="/Images/cover.png"
+                fill
+                className="object-cover"
+              />
+            )}
           </div>
           <div className="p-1 rounded-full bg-white flex items-center justify-center absolute bottom-[-75px] left-[30px]">
             <CustomizeImage

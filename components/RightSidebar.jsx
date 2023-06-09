@@ -10,7 +10,7 @@ const HomeSidebar = () => {
   };
   return (
     <div className="w-[30%] pl-8 py-4 hidden lg:block">
-      <div className="flex flex-col h-fit w-full  bg-gray-200/30 rounded-2xl sticky top-4">
+      <div className="flex flex-col h-fit w-full  bg-[#f7f9f9] rounded-2xl sticky top-4">
         <h1 className=" text-2xl p-2">Who to follow</h1>
 
         <div className="flex flex-col w-full ">

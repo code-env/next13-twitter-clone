@@ -8,14 +8,20 @@ import { ButtonContainer } from "@components";
 import { useSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
 import { openModal } from "@redux/slice/modalSlice";
+import Image from "next/image";
 
 const Share = () => {
   const [file, setFile] = useState(null);
+  const [text, setText] = useState("");
 
   const dispatch = useDispatch();
 
   const handleClick = (type) => {
     dispatch(openModal(type));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
   };
 
   const { data: sesion } = useSession();
@@ -24,27 +30,32 @@ const Share = () => {
     <div className="px-8 py-4 bg-skin-fill flex gap-4">
       {sesion?.user ? (
         <>
-            <CustomizeImage
-              src="/Images/user1.jpg"
-              height={40}
-              width={40}
-              alt="user profile picture"
-              className="rounded-full object-cover object-top max-h-[50px]"
-            />
-          <div className="share__container flex-1 flex flex-col gap-4">
+          <CustomizeImage
+            src="/Images/user1.jpg"
+            height={40}
+            width={40}
+            alt="user profile picture"
+            className="rounded-full object-cover object-top max-h-[50px]"
+          />
+          <form
+            onSubmit={handleSubmit}
+            className="share__container flex-1 flex flex-col gap-4"
+          >
             <div className="share_top border-b flex-1">
               <textarea
                 placeholder="Say something..."
+                onChange={(e) => setText(e.target.value)}
                 className="border-none outline-none placeholder:text-gray-500 bg-transparent resize-none w-full"
               />
             </div>
             <div className="share_bottom flex flex-col gap-2">
               {file && (
-                <div className="image__container flex wfull bg-red relative">
-                  <CustomizeImage
+                <div className="image__container flex w-full relative h-80">
+                  <Image
                     src={URL.createObjectURL(file)}
+                    fill
                     alt="new image to be uploaded"
-                    className="w-full max-h-[300px] object-cover rounded-3xl object-top"
+                    className="w-full max-h-80 object-cover rounded-3xl object-top"
                   />
                   <div
                     className="absolute right-0 text-2xl cursor-pointer h-[30px] w-[30px] rounded-full bg-white flex items-center justify-center"
@@ -69,10 +80,15 @@ const Share = () => {
                     <BiImage />
                   </span>
                 </label>
-                <ButtonContainer type="button" label="Tweet" />
+                <ButtonContainer
+                  type="button"
+                  label="Tweet"
+                  rounded
+                  secondary
+                />
               </div>
             </div>
-          </div>
+          </form>
         </>
       ) : (
         <div className="auth__container mx-auto flex flex-col items-center justify-center gap-4">

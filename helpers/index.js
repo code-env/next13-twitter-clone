@@ -6,6 +6,7 @@ export const useCurrentUser = async (userId) => {
     username: "codeenv",
     email: "codeenv@gmail.com",
     profileImage: "",
+    coverImage: null,
     followers: [
       {
         user: 567879087,
