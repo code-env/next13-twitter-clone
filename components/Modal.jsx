@@ -17,8 +17,6 @@ const Modal = ({ children }) => {
     if (type === "profileedit") return "Edit Your profile";
   };
 
-  console.log(header());
-
   return (
     <div className="modal__container">
       <div className="relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto">

@@ -1,6 +1,7 @@
 import { Sidebar } from "@components";
 import { ReduxProvider, SessionProvider, Wrapper } from "@providers";
 import "@styles/globals.css";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "Twitter-clone",
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
         <ReduxProvider>
           <SessionProvider>
             <Wrapper>
+              <Toaster />
               <div className="flex w-full max-[750px]:px-8 px-24">
                 <Sidebar />
                 <div className="main__container w-[80%]">{children}</div>

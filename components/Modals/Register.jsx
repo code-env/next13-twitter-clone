@@ -3,6 +3,7 @@
 import { ButtonContainer, InputContainer } from "@components";
 import { openModal } from "@redux/slice/modalSlice";
 import { useCallback, useState } from "react";
+import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
 const Register = () => {
@@ -18,12 +19,10 @@ const Register = () => {
 
   const handleRegister = useCallback(async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await fetch("/api/register", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify({
           username,
           email,
@@ -32,7 +31,16 @@ const Register = () => {
         }),
       });
 
-      console.log(response);
+      if (response.ok) {
+        const data = await response.json();
+        toast.success(data.message);
+        setTimeout(() => {
+          dispatch(openModal("login"));
+        }, 1000);
+      } else {
+        const data = await response.json();
+        toast.error(data.message);
+      }
     } catch (error) {
       console.log(error);
     } finally {
