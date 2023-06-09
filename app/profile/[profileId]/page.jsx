@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
 import { useParams } from "next/navigation";
 import { openModal } from "@redux/slice/modalSlice";
-import { useCurrentUser } from "@helpers";
+import { useCurrentUser, useFollowingUser } from "@helpers";
 import { useEffect, useState } from "react";
 
 const Profile = () => {
@@ -18,23 +18,23 @@ const Profile = () => {
   const dispatch = useDispatch();
   const { profileId } = useParams();
   const [currentUser, setCurrentUser] = useState({});
+  const [isFollingUser, setIsFollowingUser] = useState("");
 
   useEffect(() => {
     const getCurrentUser = async () => {
       const user = await useCurrentUser(35467890);
+      const followingUser = await useFollowingUser(profileId);
+      setIsFollowingUser(followingUser?.user);
       setCurrentUser(user);
     };
 
     getCurrentUser();
   }, []);
 
-  const followingUser = currentUser?.followers?.find((id) => id);
-  console.log(followingUser, profileId);
-
   const getUser = () => {
     if (currentUser.id === profileId) {
       return "Edit Profile";
-    } else if (followingUser) {
+    } else if (isFollingUser?.toString() === profileId) {
       return "Unfollow";
     } else {
       return "Follow";
@@ -62,20 +62,19 @@ const Profile = () => {
       <div className="border-x flex-1">
         <Header arrow={true} title="username" />
         <div className="w-full relative">
-          <CustomizeImage
-            alt="cover picture of username"
-            width={600}
-            height={200}
-            src="/Images/cover.png"
-            className="w-full h-[200px] object-cover"
-          />
-          <div className="p-1 rounded-full h-[150px] w-[150px] bg-white absolute bottom-[-75px] left-[30px]">
+          <div className="h-44 bg-black relative">
+            <CustomizeImage
+              alt="cover picture of username"
+              src="/Images/cover.png"
+              className="object-cover"
+            />
+          </div>
+          <div className="p-1 rounded-full bg-white flex items-center justify-center absolute bottom-[-75px] left-[30px]">
             <CustomizeImage
               alt="profile picture of username"
               src="/Images/user1.jpg"
-              width={150}
-              height={150}
-              className="rounded-full w-full h-full"
+              className="rounded-full"
+              isLarge
             />
           </div>
         </div>

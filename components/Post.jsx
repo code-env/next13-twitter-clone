@@ -4,6 +4,7 @@ import { CustomizeImage } from "@components";
 import { userPosts } from "@constants";
 import { openModal } from "@redux/slice/modalSlice";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import { useState } from "react";
 import { BiComment, BiHeart } from "react-icons/bi";
 import { useDispatch } from "react-redux";
@@ -15,7 +16,11 @@ const Post = ({ data }) => {
 
   const post = userPosts.find((post) => post.id === data.id);
 
-  const handleAddComment = async () => {};
+  const handleAddComment = async () => {
+    if (!session?.user) {
+      return dispatch(openModal("login"));
+    }
+  };
 
   const handleAddLike = async () => {
     if (!session?.user) {
@@ -54,13 +59,14 @@ const Post = ({ data }) => {
           <div className="post__content flex flex-col gap-4">
             <p className="text-gray-600">{data.text}</p>
             {data.image && (
-              <CustomizeImage
-                src={data.image}
-                height={300}
-                width={550}
-                alt="user profile picture"
-                className="rounded-3xl max-h-[300px] object-cover object-top"
-              />
+              <div className="post__img h-80 w-full bg-black relative rounded-3xl overflow-hidden">
+                <Image
+                  src={data.image}
+                  fill
+                  alt={data.text}
+                  className="object-cover "
+                />
+              </div>
             )}
 
             <div className="post__action flex items-center list-none gap-4">

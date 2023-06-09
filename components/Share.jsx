@@ -24,7 +24,6 @@ const Share = () => {
     <div className="px-8 py-4 bg-skin-fill flex gap-4">
       {sesion?.user ? (
         <>
-          <div className="user__profile  ">
             <CustomizeImage
               src="/Images/user1.jpg"
               height={40}
@@ -32,7 +31,6 @@ const Share = () => {
               alt="user profile picture"
               className="rounded-full object-cover object-top max-h-[50px]"
             />
-          </div>
           <div className="share__container flex-1 flex flex-col gap-4">
             <div className="share_top border-b flex-1">
               <textarea
@@ -45,8 +43,6 @@ const Share = () => {
                 <div className="image__container flex wfull bg-red relative">
                   <CustomizeImage
                     src={URL.createObjectURL(file)}
-                    height={20}
-                    width={20}
                     alt="new image to be uploaded"
                     className="w-full max-h-[300px] object-cover rounded-3xl object-top"
                   />
