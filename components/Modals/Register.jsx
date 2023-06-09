@@ -2,6 +2,7 @@
 
 import { ButtonContainer, InputContainer } from "@components";
 import { openModal } from "@redux/slice/modalSlice";
+import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -18,7 +19,14 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    try {
+      setIsLoading(true);
+      await axios.post("http://localhost:3000/api/auth/register", userData);
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const toggleModal = () => {
