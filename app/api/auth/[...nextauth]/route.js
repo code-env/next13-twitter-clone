@@ -13,25 +13,22 @@ const handler = NextAuth({
         email: { label: "email", type: "text" },
         password: { label: "password", type: "password" },
       },
-      async authorize({ email, password }) {
-        if (!email || !password) {
-          throw new Error("Credentials required");
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error("Invalid credentials");
         }
 
         connectDB();
 
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email: credentials.email });
 
         if (!user) {
           throw new Error("User not found!");
         }
 
-        const hashedPassword = await compare(
-          credentials.password,
-          user.password
-        );
+        const isMatch = await compare(credentials.password, user.password);
 
-        if (!hashedPassword) {
+        if (!isMatch) {
           throw new Error("User password's don't match!");
         }
 
@@ -39,6 +36,11 @@ const handler = NextAuth({
       },
     }),
   ],
+  debug: process.env.NODE_ENV === "development",
+  session: {
+    strategy: "jwt",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 });
 
 export { handler as GET, handler as POST };

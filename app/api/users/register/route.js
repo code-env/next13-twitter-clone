@@ -20,7 +20,9 @@ export const POST = async (request) => {
     const hashedPassword = await hash(password, 10);
 
     const user = new User({ username, email, password: hashedPassword });
+
     await user.save();
+
     return new Response(
       JSON.stringify({ message: "User created successfully" }),
       {
@@ -31,7 +33,6 @@ export const POST = async (request) => {
       }
     );
   } catch (error) {
-    console.log(error.message);
     return new Response(JSON.stringify({ message: error.message }), {
       status: 500,
       headers: {
@@ -40,3 +41,5 @@ export const POST = async (request) => {
     });
   }
 };
+
+export { handler as GET, handler as POST };

@@ -4,9 +4,13 @@ import Link from "next/link";
 import { FaTwitter } from "react-icons/fa";
 import { sidebarRoutes } from "@constants";
 import { usePathname } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const handleSignOut = () => {
+    signOut();
+  };
 
   return (
     <div className={`w-[20%]  min-h-screen py-4`}>
@@ -27,6 +31,9 @@ const Sidebar = () => {
               </li>
             </Link>
           ))}
+          <li className="cursor-pointer" onClick={handleSignOut}>
+            signOut
+          </li>
         </ul>
       </div>
     </div>

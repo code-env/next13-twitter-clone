@@ -2,7 +2,9 @@
 
 import { ButtonContainer, InputContainer } from "@components";
 import { openModal } from "@redux/slice/modalSlice";
-import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useCallback, useState } from "react";
+import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
 const Login = () => {
@@ -14,10 +16,18 @@ const Login = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = async (e) => {
+  const handleLogin = useCallback(async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-  };
+    try {
+      signIn("credentials", {
+        email,
+        password,
+      });
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
+  });
 
   const toggleModal = () => {
     if (isLoading) {

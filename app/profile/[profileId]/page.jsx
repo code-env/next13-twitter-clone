@@ -6,7 +6,7 @@ import {
   Header,
   HomeSidebar,
 } from "@components";
-// import { useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
 import { useParams } from "next/navigation";
 import { openModal } from "@redux/slice/modalSlice";
@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 const Profile = () => {
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
   const dispatch = useDispatch();
   const { profileId } = useParams();
   const [currentUser, setCurrentUser] = useState({});
@@ -31,6 +31,8 @@ const Profile = () => {
 
     getCurrentUser();
   }, []);
+
+  console.log(session);
 
   const getUser = () => {
     if (currentUser?.id?.toString() === profileId) {
