@@ -21,7 +21,7 @@ const Register = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await fetch("/api/register", {
+      const response = await fetch("/api/users/register", {
         method: "POST",
         body: JSON.stringify({
           username,
@@ -34,9 +34,7 @@ const Register = () => {
       if (response.ok) {
         const data = await response.json();
         toast.success(data.message);
-        setTimeout(() => {
-          dispatch(openModal("login"));
-        }, 1000);
+        dispatch(openModal("login"));
       } else {
         const data = await response.json();
         toast.error(data.message);

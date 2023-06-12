@@ -2,7 +2,7 @@ import User from "@models/user";
 import { connectDB } from "@config/db";
 import { hash } from "bcrypt";
 
-export const POST = async (request) => {
+const handler = async (request) => {
   const { username, email, password } = await request.json();
   try {
     connectDB();
